@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,7 +31,7 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsGreetingUsingTheUsersName() {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(0);
 
         String actualGreeting = greetingService.getCustomizedGreeting(USER);
@@ -40,7 +41,7 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsGreeting() {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(1);
 
         String actualGreeting = greetingService.getCustomizedGreeting(USER);
@@ -50,7 +51,7 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsWelcomeGreeting() {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(2);
 
         String actualGreeting = greetingService.getCustomizedGreeting(USER);
@@ -60,7 +61,7 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsSpendidGreeting() {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(3);
 
         String actualGreeting = greetingService.getCustomizedGreeting(USER);

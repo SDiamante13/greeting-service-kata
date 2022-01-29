@@ -1,15 +1,14 @@
 package tech.pathtoprogramming.greeting;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static java.lang.String.format;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -55,7 +54,7 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsCustomizedMessage() throws Exception {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(0);
 
         mockMvc.perform(get("/greeting/{user}", USER))
@@ -71,7 +70,7 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsRandomCustomizedMessage() throws Exception {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                         .willReturn(1);
 
         mockMvc.perform(get("/greeting/{user}", USER))
@@ -87,7 +86,7 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsWelcomeGreeting() throws Exception {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(2);
 
         mockMvc.perform(get("/greeting/{user}", USER))
@@ -103,7 +102,7 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsSpendidGreeting() throws Exception {
-        given(mockRandomNumber.generateRandom())
+        given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(3);
 
         mockMvc.perform(get("/greeting/{user}", USER))

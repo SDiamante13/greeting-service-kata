@@ -7,13 +7,14 @@ import java.util.Random;
 @Component
 public class RandomNumber {
 
+    public static final int NUMBER_OF_MESSAGES = 4;
     private final Random random;
 
     public RandomNumber() {
         this.random = new Random();
     }
 
-    public int generateRandom() {
-        return random.nextInt(4);
+    public int generateRandom(int upperBound) {
+        return random.nextInt(NUMBER_OF_MESSAGES);
     }
 }

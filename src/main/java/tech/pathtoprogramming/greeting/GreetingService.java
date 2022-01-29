@@ -11,7 +11,8 @@ public class GreetingService {
 
     private final RandomNumber randomNumber;
 
-    private final List<String> greetings = List.of(
+    private static final String SIMPLE_GREETING = "Hello my friend!";
+    private static final List<String> greetings = List.of(
             "Hello %s!",
             "Hey %s, nice to see you here!",
             "%s welcome back!",
@@ -22,14 +23,12 @@ public class GreetingService {
         this.randomNumber = randomNumber;
     }
 
-    public static final String SIMPLE_GREETING = "Hello my friend!";
-
     public String getSimpleGreeting() {
         return SIMPLE_GREETING;
     }
 
     public String getCustomizedGreeting(String name) {
-        int greetingIndex = randomNumber.generateRandom();
+        int greetingIndex = randomNumber.generateRandom(greetings.size());
         return format(greetings.get(greetingIndex), name);
     }
 }

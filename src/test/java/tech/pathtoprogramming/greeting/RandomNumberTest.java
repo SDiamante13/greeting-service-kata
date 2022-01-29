@@ -7,8 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 class RandomNumberTest {
 
     @Test
-    void randomNumberReturnsANumberRangingFromZeroToThree() {
-        int randomlyGeneratedNumber = new RandomNumber().generateRandom();
+    void randomNumberReturnsANumberRangingFromZeroToThreeGivenAnUpperBoundOfFour() {
+        int randomlyGeneratedNumber = new RandomNumber().generateRandom(4);
 
         assertThat(randomlyGeneratedNumber)
                 .isBetween(0, 3);

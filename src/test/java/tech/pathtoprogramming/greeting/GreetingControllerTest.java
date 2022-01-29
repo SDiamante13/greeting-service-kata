@@ -18,10 +18,10 @@ class GreetingControllerTest {
     @Mock
     GreetingService mockGreetingService;
 
-    private static final String USER = "Joe";
-
     @InjectMocks
     GreetingController greetingController;
+
+    private static final String USER = "Joe";
 
     @Test
     void getSimpleGreetingReturnsASimpleGreetingToTheConsumer() {
