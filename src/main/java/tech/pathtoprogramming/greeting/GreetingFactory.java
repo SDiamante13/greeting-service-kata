@@ -5,13 +5,12 @@ public class GreetingFactory {
     private GreetingFactory() {
     }
 
-    // TODO: extract Hour type out of hourOfDay - primitive obsession
-    public static Greeting getGreeting(int hourOfDay) {
-        if (hourOfDay >= 7 && hourOfDay <= 11) {
+    public static Greeting getGreeting(HourOfDay hourOfDay) {
+        if (hourOfDay.isMorning()) {
             return new MorningGreeting();
-        } else if (hourOfDay >= 12 && hourOfDay <= 20) {
+        } else if (hourOfDay.isAfternoon()) {
             return new AfternoonGreeting();
-        } else if (hourOfDay >= 21 || hourOfDay <= 6) {
+        } else if (hourOfDay.isNight()) {
             return new NightGreeting();
         } else {
             throw new RuntimeException();

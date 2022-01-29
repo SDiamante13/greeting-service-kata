@@ -25,7 +25,8 @@ public class GreetingService {
 
     public String getCustomizedGreeting(String name) {
         int hourOfDay = timepiece.getCurrentHour();
-        Greeting greeting = GreetingFactory.getGreeting(hourOfDay);
+        HourOfDay hour = new HourOfDay(hourOfDay);
+        Greeting greeting = GreetingFactory.getGreeting(hour);
 
         int greetingIndex = randomNumber.generateRandom(greeting.getGreetings().size());
         return format(greeting.getGreetings().get(greetingIndex), name);
