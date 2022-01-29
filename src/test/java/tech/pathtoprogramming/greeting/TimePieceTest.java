@@ -2,12 +2,17 @@ package tech.pathtoprogramming.greeting;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalTime;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class TimePieceTest {
+
+    private final Timepiece timepiece = new Timepiece();
+
     @Test
-    void getTimeOfDay() {
-        int localTime = LocalTime.now().getHour();
-        System.out.println("Time now: " + localTime);
+    void getCurrentHourReturnsANumberBetweenOneAndTwentyFourDependingOnTheTimeOfDay() {
+        HourOfDay currentHour = timepiece.getCurrentHour();
+
+        assertThat(currentHour.hour())
+                .isBetween(0, 23);
     }
 }

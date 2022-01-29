@@ -18,4 +18,8 @@ public class HourOfDay {
     public boolean isNight() {
         return this.hour >= 21 || this.hour <= 6;
     }
+
+    public int hour() {
+        return this.hour;
+    }
 }
