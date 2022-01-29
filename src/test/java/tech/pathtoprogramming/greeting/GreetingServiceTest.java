@@ -17,10 +17,16 @@ class GreetingServiceTest {
     @Mock
     private RandomNumber mockRandomNumber;
 
+    @Mock
+    private Timepiece mockTimepiece;
+
     @InjectMocks
     private GreetingService greetingService;
 
     private static final String USER = "Joe";
+    private static final int MORNING_HOUR = 7;
+    private static final int AFTERNOON_HOUR = 12;
+    private static final int NIGHT_HOUR = 21;
 
     @Test
     void getSimpleGreetingReturnsASimpleGreeting() {
@@ -31,6 +37,8 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsGreetingUsingTheUsersName() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(AFTERNOON_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(0);
 
@@ -41,6 +49,8 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsGreeting() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(1);
 
@@ -51,6 +61,8 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsWelcomeGreeting() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(2);
 
@@ -61,6 +73,8 @@ class GreetingServiceTest {
 
     @Test
     void getCustomizedGreetingReturnsSpendidGreeting() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(3);
 

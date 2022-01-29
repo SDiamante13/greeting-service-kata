@@ -19,12 +19,18 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @SpringBootTest
 class GreetingAcceptanceTest {
 
+    private static final int MORNING_HOUR = 7;
+    private static final int AFTERNOON_HOUR = 12;
+    private static final int NIGHT_HOUR = 21;
     private MockMvc mockMvc;
 
     private static final String USER = "Joe";
 
     @MockBean
     private RandomNumber mockRandomNumber;
+
+    @MockBean
+    private Timepiece mockTimepiece;
 
     @Autowired
     private GreetingController greetingController;
@@ -54,6 +60,8 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsCustomizedMessage() throws Exception {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(AFTERNOON_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(0);
 
@@ -70,8 +78,10 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsRandomCustomizedMessage() throws Exception {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
-                        .willReturn(1);
+                .willReturn(1);
 
         mockMvc.perform(get("/greeting/{user}", USER))
                 .andDo(print())
@@ -86,6 +96,8 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsWelcomeGreeting() throws Exception {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(2);
 
@@ -102,6 +114,8 @@ class GreetingAcceptanceTest {
      */
     @Test
     void greetingWithGivenUserReturnsSpendidGreeting() throws Exception {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
         given(mockRandomNumber.generateRandom(anyInt()))
                 .willReturn(3);
 
@@ -109,5 +123,46 @@ class GreetingAcceptanceTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(format("Have a splendid day %s.", USER)));
+    }
+
+    /**
+     * When a User with the name Joe requests a greeting message
+     * And the time is early in the morning
+     * Then the system will reply with a customized message that says:
+     * "Good morning, Joe! The sun is high and shining!"
+     */
+    @Test
+    void greetingWithGivenUserReturnsCustomizedGreetingForTheMorning() throws Exception {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(MORNING_HOUR);
+        given(mockRandomNumber.generateRandom(anyInt()))
+                .willReturn(0);
+
+        mockMvc.perform(get("/greeting/{user}", USER))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(
+                                format("Good morning, %s! The sun is high and shining!", USER)
+                        )
+                );
+    }
+
+    /**
+     * When a User with the name Joe requests a greeting message
+     * And the time is early in the morning
+     * Then the system will reply with a customized message that says:
+     * "Have a good night, Joe"
+     */
+    @Test
+    void greetingWithGivenUserReturnsCustomizedGreetingForTheNight() throws Exception {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(NIGHT_HOUR);
+        given(mockRandomNumber.generateRandom(anyInt()))
+                .willReturn(0);
+
+        mockMvc.perform(get("/greeting/{user}", USER))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(format("Have a good night, %s", USER)));
     }
 }

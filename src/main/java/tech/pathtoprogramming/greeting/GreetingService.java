@@ -10,17 +10,13 @@ import static java.lang.String.format;
 public class GreetingService {
 
     private final RandomNumber randomNumber;
+    private final Timepiece timepiece;
 
     private static final String SIMPLE_GREETING = "Hello my friend!";
-    private static final List<String> greetings = List.of(
-            "Hello %s!",
-            "Hey %s, nice to see you here!",
-            "%s welcome back!",
-            "Have a splendid day %s."
-    );
 
-    public GreetingService(RandomNumber randomNumber) {
+    public GreetingService(RandomNumber randomNumber, Timepiece timepiece) {
         this.randomNumber = randomNumber;
+        this.timepiece = timepiece;
     }
 
     public String getSimpleGreeting() {
@@ -28,7 +24,10 @@ public class GreetingService {
     }
 
     public String getCustomizedGreeting(String name) {
-        int greetingIndex = randomNumber.generateRandom(greetings.size());
-        return format(greetings.get(greetingIndex), name);
+        int hourOfDay = timepiece.getCurrentHour();
+        Greeting greeting = GreetingFactory.getGreeting(hourOfDay);
+
+        int greetingIndex = randomNumber.generateRandom(greeting.getGreetings().size());
+        return format(greeting.getGreetings().get(greetingIndex), name);
     }
 }
