@@ -8,7 +8,7 @@ class GreetingServiceTest {
     private final GreetingService greetingService = new GreetingService();
 
     @Test
-    void getSimpleGreetingReturnsHelloMyFriend() {
+    void getSimpleGreetingReturnsASimpleGreeting() {
         String actualGreeting = greetingService.getSimpleGreeting();
 
         Assertions.assertThat(actualGreeting).isEqualTo("Hello my friend!");

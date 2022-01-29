@@ -21,7 +21,7 @@ class GreetingControllerTest {
     GreetingController greetingController;
 
     @Test
-    void getSimpleGreetingReturnsHelloMyFriend() {
+    void getSimpleGreetingReturnsASimpleGreetingToTheConsumer() {
         given(mockGreetingService.getSimpleGreeting())
                 .willReturn("Hello my friend!");
 

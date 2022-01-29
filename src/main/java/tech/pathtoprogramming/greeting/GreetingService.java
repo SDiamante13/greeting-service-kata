@@ -4,7 +4,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingService {
+
+    public static final String SIMPLE_GREETING = "Hello my friend!";
+
     public String getSimpleGreeting() {
-        return "Hello my friend!";
+        return SIMPLE_GREETING;
     }
 }
