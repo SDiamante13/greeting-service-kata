@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class GreetingAcceptanceTest {
 
     private MockMvc mockMvc;
+
     @Autowired
     private GreetingController greetingController;
 
@@ -35,7 +36,4 @@ class GreetingAcceptanceTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello my friend!"));
     }
-    
-
-
 }
