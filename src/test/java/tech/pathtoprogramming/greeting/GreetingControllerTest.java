@@ -30,4 +30,15 @@ class GreetingControllerTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo("Hello my friend!");
     }
+
+    @Test
+    void getCustomizedGreetingReturnsAGreetingWithTheUsersName() {
+        given(mockGreetingService.getCustomizedGreeting("Joe"))
+                .willReturn("Hello Joe!");
+
+        ResponseEntity<String> response = greetingController.getCustomizedGreeting("Joe");
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo("Hello Joe!");
+    }
 }

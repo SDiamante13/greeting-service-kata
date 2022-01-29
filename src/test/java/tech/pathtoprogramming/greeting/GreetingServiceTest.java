@@ -1,7 +1,8 @@
 package tech.pathtoprogramming.greeting;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class GreetingServiceTest {
 
@@ -11,6 +12,13 @@ class GreetingServiceTest {
     void getSimpleGreetingReturnsASimpleGreeting() {
         String actualGreeting = greetingService.getSimpleGreeting();
 
-        Assertions.assertThat(actualGreeting).isEqualTo("Hello my friend!");
+        assertThat(actualGreeting).isEqualTo("Hello my friend!");
+    }
+
+    @Test
+    void getCustomizedGreetingReturnsGreetingUsingTheUsersName() {
+        String actualGreeting = greetingService.getCustomizedGreeting("Joe");
+
+        assertThat(actualGreeting).isEqualTo("Hello Joe!");
     }
 }

@@ -10,4 +10,8 @@ public class GreetingService {
     public String getSimpleGreeting() {
         return SIMPLE_GREETING;
     }
+
+    public String getCustomizedGreeting(String name) {
+        return String.format("Hello %s!", name);
+    }
 }
