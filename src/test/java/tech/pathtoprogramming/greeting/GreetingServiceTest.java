@@ -24,9 +24,9 @@ class GreetingServiceTest {
     private GreetingService greetingService;
 
     private static final String USER = "Joe";
-    private static final int MORNING_HOUR = 7;
-    private static final int AFTERNOON_HOUR = 12;
-    private static final int NIGHT_HOUR = 21;
+    private static final HourOfDay MORNING_HOUR = new HourOfDay(7);
+    private static final HourOfDay AFTERNOON_HOUR = new HourOfDay(12);
+    private static final HourOfDay NIGHT_HOUR = new HourOfDay(21);
 
     @Test
     void getSimpleGreetingReturnsASimpleGreeting() {
@@ -81,5 +81,43 @@ class GreetingServiceTest {
         String actualGreeting = greetingService.getCustomizedGreeting(USER);
 
         assertThat(actualGreeting).isEqualTo(format("Have a splendid day %s.", USER));
+    }
+
+    @Test
+    void getCustomizedGreetingReturnsNightGreeting() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(NIGHT_HOUR);
+        given(mockRandomNumber.generateRandom(anyInt()))
+                .willReturn(0);
+
+        String actualGreeting = greetingService.getCustomizedGreeting(USER);
+
+        assertThat(actualGreeting).isEqualTo(format("Have a good night, %s", USER));
+    }
+
+    @Test
+    void getCustomizedGreetingReturnsNightGreeting2() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(NIGHT_HOUR);
+        given(mockRandomNumber.generateRandom(anyInt()))
+                .willReturn(1);
+
+        String actualGreeting = greetingService.getCustomizedGreeting(USER);
+
+        assertThat(actualGreeting).isEqualTo(format("Wish you sweet dreams %s ...", USER));
+    }
+
+    @Test
+    void getCustomizedGreetingReturnsNightGreeting3() {
+        given(mockTimepiece.getCurrentHour())
+                .willReturn(NIGHT_HOUR);
+        given(mockRandomNumber.generateRandom(anyInt()))
+                .willReturn(2);
+
+        String actualGreeting = greetingService.getCustomizedGreeting(USER);
+
+        assertThat(actualGreeting).isEqualTo(
+                format("It was a great day! %s it's time to relax!", USER)
+        );
     }
 }

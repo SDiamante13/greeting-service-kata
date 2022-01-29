@@ -19,9 +19,9 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 @SpringBootTest
 class GreetingAcceptanceTest {
 
-    private static final int MORNING_HOUR = 7;
-    private static final int AFTERNOON_HOUR = 12;
-    private static final int NIGHT_HOUR = 21;
+    private static final HourOfDay MORNING_HOUR = new HourOfDay(7);
+    private static final HourOfDay AFTERNOON_HOUR = new HourOfDay(12);
+    private static final HourOfDay NIGHT_HOUR = new HourOfDay(21);
     private MockMvc mockMvc;
 
     private static final String USER = "Joe";

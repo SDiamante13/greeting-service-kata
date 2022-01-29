@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Timepiece {
-    public int getCurrentHour() {
-        return -1;
+    public HourOfDay getCurrentHour() {
+        return new HourOfDay(-1);
     }
 }

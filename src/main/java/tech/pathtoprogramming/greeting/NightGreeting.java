@@ -7,7 +7,7 @@ public class NightGreeting implements Greeting {
     public List<String> getGreetings() {
         return List.of(
           "Have a good night, %s",
-          "Wish you sweet dreams %s",
+          "Wish you sweet dreams %s ...",
           "It was a great day! %s it's time to relax!"
         );
     }

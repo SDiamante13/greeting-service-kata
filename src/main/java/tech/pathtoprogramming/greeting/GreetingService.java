@@ -2,8 +2,6 @@ package tech.pathtoprogramming.greeting;
 
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 import static java.lang.String.format;
 
 @Service
@@ -24,9 +22,8 @@ public class GreetingService {
     }
 
     public String getCustomizedGreeting(String name) {
-        int hourOfDay = timepiece.getCurrentHour();
-        HourOfDay hour = new HourOfDay(hourOfDay);
-        Greeting greeting = GreetingFactory.getGreeting(hour);
+        HourOfDay hourOfDay = timepiece.getCurrentHour();
+        Greeting greeting = GreetingFactory.getGreeting(hourOfDay);
 
         int greetingIndex = randomNumber.generateRandom(greeting.getGreetings().size());
         return format(greeting.getGreetings().get(greetingIndex), name);

@@ -7,7 +7,6 @@ import java.time.LocalTime;
 class TimePieceTest {
     @Test
     void getTimeOfDay() {
-
         int localTime = LocalTime.now().getHour();
         System.out.println("Time now: " + localTime);
     }
