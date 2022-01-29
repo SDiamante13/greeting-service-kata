@@ -7,7 +7,6 @@ import java.util.Random;
 @Component
 public class RandomNumber {
 
-    public static final int NUMBER_OF_MESSAGES = 4;
     private final Random random;
 
     public RandomNumber() {
@@ -15,6 +14,6 @@ public class RandomNumber {
     }
 
     public int generateRandom(int upperBound) {
-        return random.nextInt(NUMBER_OF_MESSAGES);
+        return random.nextInt(upperBound);
     }
 }
