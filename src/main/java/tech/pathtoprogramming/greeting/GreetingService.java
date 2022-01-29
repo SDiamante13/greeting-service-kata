@@ -2,6 +2,8 @@ package tech.pathtoprogramming.greeting;
 
 import org.springframework.stereotype.Service;
 
+import static java.lang.String.format;
+
 @Service
 public class GreetingService {
 
@@ -12,6 +14,6 @@ public class GreetingService {
     }
 
     public String getCustomizedGreeting(String name) {
-        return String.format("Hello %s!", name);
+        return format("Hello %s!", name);
     }
 }

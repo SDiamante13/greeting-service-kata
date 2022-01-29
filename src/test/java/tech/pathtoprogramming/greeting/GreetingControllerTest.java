@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
@@ -16,6 +17,8 @@ class GreetingControllerTest {
 
     @Mock
     GreetingService mockGreetingService;
+
+    private static final String USER = "Joe";
 
     @InjectMocks
     GreetingController greetingController;
@@ -33,12 +36,12 @@ class GreetingControllerTest {
 
     @Test
     void getCustomizedGreetingReturnsAGreetingWithTheUsersName() {
-        given(mockGreetingService.getCustomizedGreeting("Joe"))
-                .willReturn("Hello Joe!");
+        given(mockGreetingService.getCustomizedGreeting(USER))
+                .willReturn(format("Hello %s!", USER));
 
-        ResponseEntity<String> response = greetingController.getCustomizedGreeting("Joe");
+        ResponseEntity<String> response = greetingController.getCustomizedGreeting(USER);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo("Hello Joe!");
+        assertThat(response.getBody()).isEqualTo(format("Hello %s!", USER));
     }
 }
