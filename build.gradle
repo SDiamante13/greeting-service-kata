@@ -11,10 +11,18 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 11
 
 jar {
+    enabled = false
+}
+
+jar {
     manifest {
         attributes(
                 'Main-Class': 'tech.pathtoprogramming.greeting.GreetingApplication'
         )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
